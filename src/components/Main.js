@@ -1,21 +1,23 @@
 import style from "../styles/Header.css";
-import uniqid from "uniqid"
-const Main = (reference) => {
-  console.log(reference.reference);
-  const { waldo, odlaw, wizard } = reference.reference.characters;
-  const characters = reference.reference.characters;
-  const { img } = reference.reference;
+import uniqid from "uniqid";
+import { useState } from "react";
+const Main = ({ reference, levelHolder, setModal, setTime }) => {
+  console.log(reference);
+  const characters = reference[levelHolder].characters;
+  const { img } = reference[levelHolder];
   let statuses = {};
+  const [startTime, setStartTime] = useState(0);
+  let endTime = 0;
   Object.keys(characters).forEach((x) => {
     statuses[x] = false;
-  })
+  });
   let finished = true;
   const renderList = (e) => {
     const main = document.querySelector(".main");
     const waldo = document.querySelector("#image");
     const imageholder = document.querySelector(".imageholder");
     let testY =
-      ((e.pageY - main.offsetTop) * 100) /
+      ((e.pageY - main.offsetTop - imageholder.offsetTop) * 100) /
       document.querySelector("#image").clientHeight;
     let testX =
       ((e.pageX -
@@ -38,6 +40,7 @@ const Main = (reference) => {
 
   const verifyData = (e) => {
     const itemClicked = e.target.getAttribute("item");
+    console.log(itemClicked);
     const target = e.target.parentElement.style;
     const targetDiv = document.createElement("div");
     targetDiv.style.width = "5px";
@@ -69,6 +72,7 @@ const Main = (reference) => {
     );
     if (overlap) {
       statuses[itemClicked] = true;
+      document.querySelector('.' + itemClicked).style.opacity = "50%";
     }
     finished = true;
     Object.keys(statuses).forEach((x) => {
@@ -78,14 +82,34 @@ const Main = (reference) => {
     });
     if (finished) {
       console.log("done");
+      endTime = new Date().getTime();
+      let difference = (endTime - startTime) / 1000;
+      console.log(startTime)
+      console.log(difference);
+      setTime(difference);
+      setModal(true);
     }
   };
 
   return (
     <div className="main" style={style}>
+      <div className="charholder">
+        {Object.keys(characters).map((x) => {
+          return (
+            <div key={uniqid()} className={"chars " + x}>
+              <img src={characters[x].img}></img>
+              <div>{x}</div>
+            </div>
+          )
+        })}
+      </div>
       <div className="imageholder">
         <img
           id="image"
+          onLoad={(e) => {
+            setStartTime(new Date().getTime());
+            console.log(startTime);
+          }}
           src={img}
           alt=""
           onClick={(e) => {
@@ -95,36 +119,17 @@ const Main = (reference) => {
         <div id="list" className="hidden">
           {Object.keys(characters).map((x) => {
             return (
-              <div key={uniqid()} className="listitems" item={x} onClick={(e) => verifyData(e)}>
+              <div
+                key={uniqid()}
+                className="listitems"
+                item={x}
+                onClick={(e) => verifyData(e)}
+              >
                 {x}
               </div>
             );
           })}
-          {/* <div
-            className="listitems"
-            item="waldo"
-            onClick={(e) => verifyData(e)}
-          >
-            Waldo
-          </div>
-          <div
-            className="listitems"
-            item="odlaw"
-            onClick={(e) => verifyData(e)}
-          >
-            Odlaw
-          </div>
-          <div
-            className="listitems"
-            item="wizard"
-            onClick={(e) => verifyData(e)}
-          >
-            Wizard
-          </div> */}
         </div>
-        {/* <div className="test1" style={{visibility: "hidden"}}></div>
-        <div className="test2"></div>
-        <div className="test3"></div> */}
       </div>
     </div>
   );
