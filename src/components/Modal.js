@@ -16,9 +16,11 @@ const Modal = ({ time, setModal, database, levelHolder }) => {
       <div className="box">
         <div className="boxheader">You finished in {time} seconds!</div>
         <div className="form">
-          <div>Enter your name to save score on the leaderboard</div>
-          <label htmlFor="username">Username</label>
-          <input id="username"></input>
+          <div className="formfield">
+            <div>Enter your name to save score on the leaderboard</div>
+            <label htmlFor="username">Username</label>
+            <input id="username"></input>
+          </div>
           <div className="buttons">
             <button
               onClick={() => {
@@ -33,10 +35,9 @@ const Modal = ({ time, setModal, database, levelHolder }) => {
                   const username = document.querySelector('#username');
                   if (username.value !== "") {
                     updateLeaderBoard(username.value, time);
-                    navigate("/");
+                    navigate("/leaderboard");
                     setModal(false)
                   }
-                
               }}
             >
               Submit

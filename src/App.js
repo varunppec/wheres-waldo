@@ -116,7 +116,7 @@ function App() {
           ></Route>
           <Route
             path="/leaderboard"
-            element={<LeaderBoard database={database}></LeaderBoard>}
+            element={<LeaderBoard database={database} levelHolder={levelHolder}></LeaderBoard>}
           ></Route>
         </Routes>
       </div>

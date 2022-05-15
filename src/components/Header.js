@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import style from "../styles/Header.css";
 const Header = () => {
+    const navigate = useNavigate();
     return (
         <div className="header" style={style}>
-            <h1>Where's Waldo?</h1>
+            <h1 onClick={() => navigate("/")}>Where's Waldo?</h1>
         </div>
     )
 }
