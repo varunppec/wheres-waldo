@@ -91,7 +91,7 @@ const Main = ({ reference, levelHolder, setModal, setTime }) => {
         {Object.keys(characters).map((x) => {
           return (
             <div key={uniqid()} className={"chars " + x}>
-              <img src={characters[x].img}></img>
+              <img src={characters[x].img} alt=""></img>
               <div>{x}</div>
             </div>
           )

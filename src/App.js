@@ -2,7 +2,6 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import LevelSelector from "./components/LevelSelector";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {  getDatabase } from "firebase/database";
 import {  useState } from "react";
@@ -10,11 +9,7 @@ import Modal from "./components/Modal";
 import LeaderBoard from "./components/LeaderBoard";
 import { get,ref } from "firebase/database";
 import { useEffect } from "react";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDyW740OQL5iURUaJLROilDB1wXbIzJgAU",
   authDomain: "wheres-waldo-47536.firebaseapp.com",
@@ -27,7 +22,6 @@ const firebaseConfig = {
     "https://wheres-waldo-47536-default-rtdb.asia-southeast1.firebasedatabase.app/",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
