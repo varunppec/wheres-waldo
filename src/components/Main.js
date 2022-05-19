@@ -1,8 +1,6 @@
-import style from "../styles/Header.css";
 import uniqid from "uniqid";
 import { useState } from "react";
 const Main = ({ reference, levelHolder, setModal, setTime }) => {
-  console.log(reference);
   const characters = reference[levelHolder].characters;
   const { img } = reference[levelHolder];
   let statuses = {};
@@ -40,7 +38,6 @@ const Main = ({ reference, levelHolder, setModal, setTime }) => {
 
   const verifyData = (e) => {
     const itemClicked = e.target.getAttribute("item");
-    console.log(itemClicked);
     const target = e.target.parentElement.style;
     const targetDiv = document.createElement("div");
     targetDiv.style.width = "5px";
@@ -81,18 +78,15 @@ const Main = ({ reference, levelHolder, setModal, setTime }) => {
       }
     });
     if (finished) {
-      console.log("done");
       endTime = new Date().getTime();
       let difference = (endTime - startTime) / 1000;
-      console.log(startTime)
-      console.log(difference);
       setTime(difference);
       setModal(true);
     }
   };
 
   return (
-    <div className="main" style={style}>
+    <div className="main">
       <div className="charholder">
         {Object.keys(characters).map((x) => {
           return (
@@ -108,7 +102,6 @@ const Main = ({ reference, levelHolder, setModal, setTime }) => {
           id="image"
           onLoad={(e) => {
             setStartTime(new Date().getTime());
-            console.log(startTime);
           }}
           src={img}
           alt=""

@@ -1,4 +1,4 @@
-import { ref, child, push, update, get, set } from "firebase/database";
+import { ref, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
 
