@@ -256,12 +256,12 @@ label {
 #leaderboard {
     text-transform: none;
     display: flex;
-    margin: 40px;
+    margin: 10px;
     margin-bottom: 20px;
     min-height: 60px;
-    gap: 40px;
-    align-items: center;
-    width: calc(100vw - 80px);
+    width: calc(100% - 10px);
+    justify-content: center;
+    flex-wrap: wrap;
 
 }
 #leaderboard {
@@ -272,6 +272,7 @@ label {
 
 #leaderboard > div {
     width: 70%;
+    margin-bottom: 30px;
 }
 
 #leaderboard > * > div:nth-child(2) {
@@ -281,8 +282,10 @@ label {
 #leaderboard > button {
     padding: 0;
     min-height: 50px;
+    height: 50%;
     max-width: 30%;
     min-width: 170px;
+    grid-row: span 1;
     border: none;
     border-radius: 5px;
     background-color: #F87171;
@@ -329,6 +332,7 @@ label {
 .table {
     display: flex;
     justify-content: center;
+    margin-bottom: 30px;
 }
 table {
     width: 80%;
