@@ -1,9 +1,14 @@
 import { ref, set } from "firebase/database";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
+import { DatabaseContext, LevelHolderContext, SetModalContext } from "./Context";
 
-const Modal = ({ time, setModal, database, levelHolder }) => {
+const Modal = ({ time }) => {
+  const setModal = useContext(SetModalContext);
   const navigate = useNavigate();
+  const levelHolder = useContext(LevelHolderContext);
+  const database = useContext(DatabaseContext);
   const updateLeaderBoard = async function (username, time) {
     set(ref(database,"levels/" + levelHolder +  "/users/"+ uniqid()), {
       id: username,

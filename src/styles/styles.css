@@ -279,13 +279,10 @@ label {
     color: rgba(0, 0, 0, 0.781);
 }
 
-#leaderboard > button {
-    padding: 0;
+#leaderboard > button, .leaderboardholder > div > button {
+    padding: 10px;
     min-height: 50px;
     height: 50%;
-    max-width: 30%;
-    min-width: 170px;
-    grid-row: span 1;
     border: none;
     border-radius: 5px;
     background-color: #F87171;
@@ -295,7 +292,9 @@ label {
     cursor: pointer;
 }
 
-#leaderboard > button:hover {
+
+
+#leaderboard > button:hover, .leaderboardholder > div > button:hover {
     background-color: #EF4444;
 } 
 
@@ -398,4 +397,17 @@ th, td {
 .clicked {
     background-color: #FECACA;
     transform: scale(1.01);
+}
+
+.playlevel {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 30px;
+    margin-left: 20px ;
+}
+
+.leaderboardheader, .levelselectorheader {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 10px 0 0 20px;
 }

@@ -1,13 +1,14 @@
 import { get, onValue, ref,  } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
 import React from "react";
+import { DatabaseContext, SetLevelHolderContext } from "./Context";
 const LevelSelector = ({
-  database,
-  setLevelHolder,
   setReference,
 }) => {
+  const setLevelHolder = useContext(SetLevelHolderContext);
+  const database = useContext(DatabaseContext);
   const [levels, setLevels] = useState({})
   let navigate = useNavigate();
    const getData = async () => {
@@ -29,6 +30,7 @@ const LevelSelector = ({
   };
   return (
     <React.Fragment>
+      <div className="levelselectorheader">Select Your Level</div>
       <div className="levelholder">
         {Object.keys(levels).map((x) => {
           return (

@@ -1,6 +1,9 @@
 import uniqid from "uniqid";
-import { useState } from "react";
-const Main = ({ reference, levelHolder, setModal, setTime }) => {
+import { useContext, useState } from "react";
+import { LevelHolderContext, SetModalContext } from "./Context";
+const Main = ({ reference, setTime }) => {
+  const setModal = useContext(SetModalContext)
+  const levelHolder = useContext(LevelHolderContext);
   const characters = reference[levelHolder].characters;
   const { img } = reference[levelHolder];
   let statuses = {};

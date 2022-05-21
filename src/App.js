@@ -9,6 +9,7 @@ import Modal from "./components/Modal";
 import LeaderBoard from "./components/LeaderBoard";
 import { get,ref } from "firebase/database";
 import { useEffect } from "react";
+import { DatabaseContext, LevelHolderContext, SetModalContext, SetLevelHolderContext } from "./components/Context";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDyW740OQL5iURUaJLROilDB1wXbIzJgAU",
@@ -40,39 +41,43 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      {modal ? (
-        <Modal time={time} setModal={setModal} database={database} levelHolder={levelHolder}></Modal>
-      ) : null}
-      <div className="App">
-        <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <LevelSelector
-                database={database}
-                setReference={setReference}
-                setLevelHolder={setLevelHolder}
-              ></LevelSelector>
-            }
-          ></Route>
-          <Route
-            path="/game"
-            element={
-              <Main
-                reference={reference}
-                levelHolder={levelHolder}
-                setModal={setModal}
-                setTime={setTime}
-              />
-            }
-          ></Route>
-          <Route
-            path="/leaderboard"
-            element={<LeaderBoard database={database} levelHolder={levelHolder} setLevelHolder={setLevelHolder}></LeaderBoard>}
-          ></Route>
-        </Routes>
-      </div>
+      <DatabaseContext.Provider value={database}>
+        <LevelHolderContext.Provider value={levelHolder}>
+          <SetModalContext.Provider value={setModal}>
+            <SetLevelHolderContext.Provider value={setLevelHolder}>
+              {modal ? (
+                <Modal time={time} ></Modal>
+              ) : null}
+              <div className="App">
+                <Header />
+                <Routes>
+                  <Route
+                    path="/"
+                    element={
+                      <LevelSelector
+                        setReference={setReference}
+                      ></LevelSelector>
+                    }
+                  ></Route>
+                  <Route
+                    path="/game"
+                    element={
+                      <Main
+                        reference={reference}
+                        setTime={setTime}
+                      />
+                    }
+                  ></Route>
+                  <Route
+                    path="/leaderboard"
+                    element={<LeaderBoard></LeaderBoard>}
+                  ></Route>
+                </Routes>
+              </div>
+            </SetLevelHolderContext.Provider>
+          </SetModalContext.Provider>
+        </LevelHolderContext.Provider>
+      </DatabaseContext.Provider>
     </BrowserRouter>
   );
 }
